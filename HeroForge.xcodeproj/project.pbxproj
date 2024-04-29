@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4100D012BDB9931002F954A /* MainSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4100D002BDB9931002F954A /* MainSheetView.swift */; };
+		A4100D062BDBB7D1002F954A /* HeroSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4100D052BDBB7D1002F954A /* HeroSheetView.swift */; };
+		A4100D082BDBBE17002F954A /* EmblemSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4100D072BDBBE17002F954A /* EmblemSheetView.swift */; };
+		A4100D0A2BDBBE4F002F954A /* ItemSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4100D092BDBBE4F002F954A /* ItemSheetView.swift */; };
+		A4100D0C2BDBFAA2002F954A /* ItemTileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4100D0B2BDBFAA2002F954A /* ItemTileComponent.swift */; };
 		A41D4D8D2BD799DD00668943 /* HeroForgeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D4D8C2BD799DD00668943 /* HeroForgeApp.swift */; };
 		A41D4D8F2BD799DD00668943 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D4D8E2BD799DD00668943 /* ContentView.swift */; };
 		A41D4D912BD799DF00668943 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A41D4D902BD799DF00668943 /* Assets.xcassets */; };
@@ -14,6 +19,13 @@
 		A41D4D9E2BD799DF00668943 /* HeroForgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D4D9D2BD799DF00668943 /* HeroForgeTests.swift */; };
 		A41D4DA82BD799DF00668943 /* HeroForgeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D4DA72BD799DF00668943 /* HeroForgeUITests.swift */; };
 		A41D4DAA2BD799DF00668943 /* HeroForgeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D4DA92BD799DF00668943 /* HeroForgeUITestsLaunchTests.swift */; };
+		A41D4DBC2BD7A8EC00668943 /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41D4DBB2BD7A8EC00668943 /* HeroModel.swift */; };
+		A428A9722BD8E6980096951F /* SkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A428A9712BD8E6980096951F /* SkillModel.swift */; };
+		A443D9222BDA0E7100DB37F0 /* AddDamageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A443D9212BDA0E7100DB37F0 /* AddDamageModel.swift */; };
+		A443D9252BDA4FC000DB37F0 /* EmblemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A443D9242BDA4FC000DB37F0 /* EmblemModel.swift */; };
+		A46339A02BDE706B005EF0E4 /* CircleItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */; };
+		A4A665582BDAAEF40043C23D /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665572BDAAEF40043C23D /* ItemModel.swift */; };
+		A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665592BDAB5F40043C23D /* PassiveModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A4100D002BDB9931002F954A /* MainSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSheetView.swift; sourceTree = "<group>"; };
+		A4100D052BDBB7D1002F954A /* HeroSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSheetView.swift; sourceTree = "<group>"; };
+		A4100D072BDBBE17002F954A /* EmblemSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmblemSheetView.swift; sourceTree = "<group>"; };
+		A4100D092BDBBE4F002F954A /* ItemSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSheetView.swift; sourceTree = "<group>"; };
+		A4100D0B2BDBFAA2002F954A /* ItemTileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTileComponent.swift; sourceTree = "<group>"; };
 		A41D4D892BD799DD00668943 /* HeroForge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeroForge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A41D4D8C2BD799DD00668943 /* HeroForgeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroForgeApp.swift; sourceTree = "<group>"; };
 		A41D4D8E2BD799DD00668943 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +61,13 @@
 		A41D4DA32BD799DF00668943 /* HeroForgeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HeroForgeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A41D4DA72BD799DF00668943 /* HeroForgeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroForgeUITests.swift; sourceTree = "<group>"; };
 		A41D4DA92BD799DF00668943 /* HeroForgeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroForgeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A41D4DBB2BD7A8EC00668943 /* HeroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
+		A428A9712BD8E6980096951F /* SkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModel.swift; sourceTree = "<group>"; };
+		A443D9212BDA0E7100DB37F0 /* AddDamageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDamageModel.swift; sourceTree = "<group>"; };
+		A443D9242BDA4FC000DB37F0 /* EmblemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmblemModel.swift; sourceTree = "<group>"; };
+		A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleItemComponent.swift; sourceTree = "<group>"; };
+		A4A665572BDAAEF40043C23D /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		A4A665592BDAB5F40043C23D /* PassiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassiveModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4100D022BDBAF9F002F954A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A4100D0B2BDBFAA2002F954A /* ItemTileComponent.swift */,
+				A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		A41D4D802BD799DD00668943 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +127,9 @@
 		A41D4D8B2BD799DD00668943 /* HeroForge */ = {
 			isa = PBXGroup;
 			children = (
+				A4100D022BDBAF9F002F954A /* Components */,
+				A443D9232BDA4F9F00DB37F0 /* Models */,
+				A41D4DBA2BD7A2CD00668943 /* Views */,
 				A41D4D8C2BD799DD00668943 /* HeroForgeApp.swift */,
 				A41D4D8E2BD799DD00668943 /* ContentView.swift */,
 				A41D4D902BD799DF00668943 /* Assets.xcassets */,
@@ -125,6 +161,30 @@
 				A41D4DA92BD799DF00668943 /* HeroForgeUITestsLaunchTests.swift */,
 			);
 			path = HeroForgeUITests;
+			sourceTree = "<group>";
+		};
+		A41D4DBA2BD7A2CD00668943 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4100D002BDB9931002F954A /* MainSheetView.swift */,
+				A4100D052BDBB7D1002F954A /* HeroSheetView.swift */,
+				A4100D072BDBBE17002F954A /* EmblemSheetView.swift */,
+				A4100D092BDBBE4F002F954A /* ItemSheetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A443D9232BDA4F9F00DB37F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A41D4DBB2BD7A8EC00668943 /* HeroModel.swift */,
+				A428A9712BD8E6980096951F /* SkillModel.swift */,
+				A443D9212BDA0E7100DB37F0 /* AddDamageModel.swift */,
+				A443D9242BDA4FC000DB37F0 /* EmblemModel.swift */,
+				A4A665572BDAAEF40043C23D /* ItemModel.swift */,
+				A4A665592BDAB5F40043C23D /* PassiveModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +317,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4100D062BDBB7D1002F954A /* HeroSheetView.swift in Sources */,
+				A4100D012BDB9931002F954A /* MainSheetView.swift in Sources */,
+				A4100D082BDBBE17002F954A /* EmblemSheetView.swift in Sources */,
+				A4100D0C2BDBFAA2002F954A /* ItemTileComponent.swift in Sources */,
 				A41D4D8F2BD799DD00668943 /* ContentView.swift in Sources */,
+				A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */,
+				A443D9252BDA4FC000DB37F0 /* EmblemModel.swift in Sources */,
+				A443D9222BDA0E7100DB37F0 /* AddDamageModel.swift in Sources */,
 				A41D4D8D2BD799DD00668943 /* HeroForgeApp.swift in Sources */,
+				A41D4DBC2BD7A8EC00668943 /* HeroModel.swift in Sources */,
+				A4100D0A2BDBBE4F002F954A /* ItemSheetView.swift in Sources */,
+				A4A665582BDAAEF40043C23D /* ItemModel.swift in Sources */,
+				A46339A02BDE706B005EF0E4 /* CircleItemComponent.swift in Sources */,
+				A428A9722BD8E6980096951F /* SkillModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +494,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HeroForge/Preview Content\"";
+				DEVELOPMENT_TEAM = Y834K368F4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -450,6 +523,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HeroForge/Preview Content\"";
+				DEVELOPMENT_TEAM = Y834K368F4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
