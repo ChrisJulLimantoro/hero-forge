@@ -15,6 +15,11 @@ struct ContentView: View {
     ]
     @State private var indexHero = 0
     @State var chosen:[Int?] = [nil,nil]
+    @State var current:[Int?] = [nil,nil]
+    @State var chosenItem:[Int?] = [nil,nil,nil,nil,nil,nil]
+    @State var currentItem:[Int?] = [nil,nil,nil,nil,nil,nil]
+    @State var chosenEmblem:[String:Int?] = ["main":nil,"sub1":nil,"sub2":nil,"sub3":nil]
+    @State var currentEmblem:[String:Int?] = ["main":nil,"sub1":nil,"sub2":nil,"sub3":nil]
     
     var body: some View {
         NavigationStack{
@@ -138,10 +143,20 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $isPresented){
-                MainSheetView(selectedHeroes:$selectedHeroes,indexHero:$indexHero, chosenHero:$chosen[indexHero], tempHero: selectedHeroes[indexHero])
-                    .presentationDetents([.large])
-                    .presentationBackgroundInteraction(.disabled)
-                    .presentationBackground(.thinMaterial)
+                MainSheetView(
+                    selectedHeroes:$selectedHeroes,
+                    indexHero:$indexHero,
+                    chosenHero:$chosen[indexHero],
+                    currentHero:$current[indexHero],
+                    chosenEmblem:$chosenEmblem,
+                    currentEmblem:$currentEmblem,
+                    chosenItem:$chosenItem,
+                    currentItem:$currentItem,
+                    tempHero: selectedHeroes[indexHero]
+                )
+                .presentationDetents([.large])
+                .presentationBackgroundInteraction(.disabled)
+                .presentationBackground(.thinMaterial)
             }
             .ignoresSafeArea()
         }

@@ -15,17 +15,26 @@ struct HeroSheetView: View {
         Hero(name: "Tigreal", image:"tigreal-bg", avatar:"tigreal-avatar", role:"Tank", hp: 2690, hpGrowth: 292, mana: 450, manaGrowth: 100, physicalAtt: 112, physicalAttGrowth: 6.7857, physicalDef: 20, physicalDefGrowth: 5.3571, magicDef: 15, magicDefGrowth: 2.5, attSpeed: 1.03, attSpeedGrowth: 0.02),
     ]
     @Binding var hero:Hero
-    @Binding var chosen:Int?
+    @Binding var current:Int?
+    @State var chosen:Int?
     @State var name:String = ""
-    @State var current:Int?
-    
+    var useData:[Hero] {
+        if name != "" {
+            return data.filter{
+                $0.name.lowercased().contains(name.lowercased())
+            }
+        }else{
+            return data
+        }
+    }
     var body: some View {
         NavigationStack{
-            VStack{
+            VStack(alignment:.leading){
                 HStack{
-                    VStack{
-                        ForEach(0..<((data.count + 3) / 4), id: \.self) { rowIndex in
+                    VStack(alignment:.leading){
+                        ForEach(0..<((useData.count + 3) / 4), id: \.self) { rowIndex in
                             HStack {
+                                Spacer()
                                 ForEach(0..<4) { columnIndex in
                                     let heroIndex = rowIndex * 4 + columnIndex
                                     if heroIndex < data.count {
@@ -51,14 +60,20 @@ struct HeroSheetView: View {
                                                     .font(.callout)
                                                     .fontWeight(.medium)
                                                     .fontDesign(.rounded)
+                                                    .frame(width:70,height:30,alignment:.center)
+                                                    .fixedSize(horizontal:true,vertical:true)
+                                                    .truncationMode(.tail)
                                             }.onTapGesture{
                                                 current = heroIndex
                                             }
                                             Spacer()
                                         } else {
-                                            Spacer()
+                                            
                                         }
                                     } else {
+                                        Circle()
+                                            .fill(.clear)
+                                            .frame(width: 60, height: 60)
                                         Spacer()
                                     }
                                 }
@@ -74,6 +89,10 @@ struct HeroSheetView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.white)
                     }
+                        .onAppear{
+                            debugPrint("current : \(String(describing: current))")
+                            debugPrint("chosen : \(String(describing: chosen))")
+                        }
                 )
                 Spacer()
             }
@@ -84,16 +103,17 @@ struct HeroSheetView: View {
                 ToolbarItem(placement: .cancellationAction){
                     Button("Cancel"){
                         dismiss()
+                        current = chosen
                     }
                 }
                 ToolbarItem(placement: .confirmationAction){
                     Button("Save"){
-                        chosen = current
-                        hero.setHero(hero:data[chosen!])
+                        hero.setHero(hero:data[current!])
                         dismiss()
                     }.disabled(current == chosen)
                 }
             }.padding([.horizontal],16.0)
+                
         }
     }
 }

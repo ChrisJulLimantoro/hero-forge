@@ -10,14 +10,20 @@ import Foundation
 
 
 struct MainSheetView:View {
+    @Environment(\.dismiss) var dismiss
     @Binding var selectedHeroes:[Hero]
     @Binding var indexHero:Int
     @Binding var chosenHero:Int?
-    @Environment(\.dismiss) var dismiss
+    @Binding var currentHero:Int?
+    @Binding var chosenEmblem:[String:Int?]
+    @Binding var currentEmblem:[String:Int?]
+    @Binding var chosenItem:[Int?]
+    @Binding var currentItem:[Int?]
     @State private var isPresented = false
     @State private var typePresented = 0
-    @State private var items = [Item?](repeating: nil, count: 6)
     @State var tempHero:Hero
+    @State var emblemType = ""
+    @State var itemIndex = 0
     
     var body: some View {
         NavigationStack {
@@ -76,11 +82,12 @@ struct MainSheetView:View {
                                 }else {
                                     CircleItem(image:tempHero.emblems["main"]!.image, size:60, strokeColor: Color.gray)
                                 }
-                                Text("Unselected").fontWeight(.semibold).font(.caption).fontDesign(.rounded)
+                                Text(tempHero.emblems["main"]!.name == "" ? "Unselected" : tempHero.emblems["main"]!.name).fontWeight(.semibold).font(.caption).fontDesign(.rounded)
                                 Text("main emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                             }.onTapGesture{
                                 isPresented = true
                                 typePresented = 1
+                                emblemType = "main"
                             }
                             Spacer()
                             HStack{
@@ -90,12 +97,13 @@ struct MainSheetView:View {
                                     }else {
                                         CircleItem(image:tempHero.emblems["sub1"]!.image, size:50, strokeColor: Color.gray)
                                     }
-                                    Text("Unselected").fontWeight(.semibold).font(.caption).fontDesign(.rounded)
+                                    Text(tempHero.emblems["sub1"]!.name == "" ? "Unselected" : tempHero.emblems["sub1"]!.name).fontWeight(.semibold).font(.caption2).fontDesign(.rounded).frame(width:60,height:30)
                                     Text("sub-emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                                 }
                                 .onTapGesture{
                                     isPresented = true
                                     typePresented = 1
+                                    emblemType = "sub1"
                                 }
                                 VStack{
                                     if tempHero.emblems["sub2"]!.image == "" {
@@ -103,12 +111,13 @@ struct MainSheetView:View {
                                     }else {
                                         CircleItem(image:tempHero.emblems["sub2"]!.image, size:50, strokeColor: Color.gray)
                                     }
-                                    Text("Unselected").fontWeight(.semibold).font(.caption2).fontDesign(.rounded)
+                                    Text(tempHero.emblems["sub2"]!.name == "" ? "Unselected" : tempHero.emblems["sub2"]!.name).fontWeight(.semibold).font(.caption2).fontDesign(.rounded).frame(width:60,height:30)
                                     Text("sub-emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                                 }
                                 .onTapGesture{
                                     isPresented = true
                                     typePresented = 1
+                                    emblemType = "sub2"
                                 }
                                 VStack{
                                     if tempHero.emblems["sub3"]!.image == "" {
@@ -116,12 +125,13 @@ struct MainSheetView:View {
                                     }else {
                                         CircleItem(image:tempHero.emblems["sub3"]!.image, size:50, strokeColor: Color.gray)
                                     }
-                                    Text("Unselected").fontWeight(.semibold).font(.caption).fontDesign(.rounded)
+                                    Text(tempHero.emblems["sub3"]!.name == "" ? "Unselected" : tempHero.emblems["sub3"]!.name).fontWeight(.semibold).font(.caption2).fontDesign(.rounded).frame(width:60,height:30)
                                     Text("sub-emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                                 }
                                 .onTapGesture{
                                     isPresented = true
                                     typePresented = 1
+                                    emblemType = "sub3"
                                 }
                             }
                         }
@@ -145,11 +155,11 @@ struct MainSheetView:View {
                             .padding([.bottom],-4.0)
                             .fontDesign(.rounded)
                         HStack{
-                            VStack{
+                            VStack(alignment:.leading){
                                 ForEach (0..<3) {index in
                                     ItemTile(isPresented:$isPresented,
                                              typePresented:$typePresented,
-                                             items:$tempHero.items,
+                                             items:$tempHero.items,current:$itemIndex,
                                              itemIndex:index)
                                 }
                             }
@@ -158,7 +168,7 @@ struct MainSheetView:View {
                                 ForEach (3..<6) {index in
                                     ItemTile(isPresented:$isPresented,
                                              typePresented:$typePresented,
-                                             items:$tempHero.items,
+                                             items:$tempHero.items,current:$itemIndex,
                                              itemIndex:index)
                                 }
                             }
@@ -185,29 +195,44 @@ struct MainSheetView:View {
             .toolbar{
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
+                        tempHero = selectedHeroes[indexHero]
+                        currentHero = chosenHero
+                        currentItem = chosenItem
+                        currentEmblem = chosenEmblem
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         selectedHeroes[indexHero] = tempHero
+                        chosenHero = currentHero
+                        chosenItem = currentItem
+                        chosenEmblem = currentEmblem
                         dismiss()
-                    }.disabled(chosenHero == nil)
+                    }.disabled((chosenHero == currentHero && chosenItem == currentItem && chosenEmblem == currentEmblem) || currentHero == nil)
                 }
             }
             .sheet(isPresented: $isPresented) {
                 if typePresented == 0 {
-                    HeroSheetView(hero: $tempHero,chosen: $chosenHero, current: chosenHero)
+                    HeroSheetView(hero: $tempHero, current: $currentHero, chosen: chosenHero)
                         .presentationDetents([.large])
                         .presentationBackgroundInteraction(.disabled)
                         .presentationBackground(.thinMaterial)
                 }else if typePresented == 1{
-                    EmblemSheetView(currentType:"main",hero: $tempHero)
-                        .presentationDetents([.large])
-                        .presentationBackgroundInteraction(.disabled)
-                        .presentationBackground(.thinMaterial)
+                    EmblemSheetView(
+                        currentType: emblemType,
+                        chosen: Binding<Int?>(
+                            get: { currentEmblem[emblemType]! },
+                            set: { currentEmblem[emblemType] = $0 }
+                        ),
+                        current: currentEmblem[emblemType] ?? nil,
+                        hero: $tempHero
+                    )
+                    .presentationDetents([.large])
+                    .presentationBackgroundInteraction(.disabled)
+                    .presentationBackground(.thinMaterial)
                 }else if typePresented == 2{
-                    ItemSheetView()
+                    ItemSheetView(current:currentItem[itemIndex],chosen:$currentItem[itemIndex], hero:$tempHero, index:itemIndex)
                         .presentationDetents([.large])
                         .presentationBackgroundInteraction(.disabled)
                         .presentationBackground(.thinMaterial)

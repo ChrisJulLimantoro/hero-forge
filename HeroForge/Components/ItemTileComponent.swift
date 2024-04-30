@@ -12,6 +12,7 @@ struct ItemTile: View {
     @Binding var isPresented:Bool
     @Binding var typePresented:Int
     @Binding var items:[Item]
+    @Binding var current:Int
     var itemIndex:Int
     var body: some View {
         HStack{
@@ -29,6 +30,7 @@ struct ItemTile: View {
         .onTapGesture{
             isPresented = true
             typePresented = 2
+            current = itemIndex
         }
     }
 }
