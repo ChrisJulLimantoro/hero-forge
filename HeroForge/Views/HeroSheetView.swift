@@ -11,8 +11,19 @@ import SwiftUI
 struct HeroSheetView: View {
     @Environment(\.dismiss) var dismiss
     var data:[Hero] = [
-        Hero(name: "Lancelot", image:"lancelot-bg", avatar:"lancelot-avatar", role:"Assassin", hp: 2459, hpGrowth: 147, mana: 450, manaGrowth: 100, physicalAtt: 124, physicalAttGrowth: 11.7857, physicalDef: 16, physicalDefGrowth: 3.1429, magicDef: 15, magicDefGrowth: 1.6429, attSpeed: 1.08, attSpeedGrowth: 0.0185),
-        Hero(name: "Tigreal", image:"tigreal-bg", avatar:"tigreal-avatar", role:"Tank", hp: 2690, hpGrowth: 292, mana: 450, manaGrowth: 100, physicalAtt: 112, physicalAttGrowth: 6.7857, physicalDef: 20, physicalDefGrowth: 5.3571, magicDef: 15, magicDefGrowth: 2.5, attSpeed: 1.03, attSpeedGrowth: 0.02),
+        Hero(name: "Lancelot", image:"lancelot-bg", avatar:"lancelot-avatar", role:"Assassin", hp: 2459, hpGrowth: 147, mana: 450, manaGrowth: 100, physicalAtt: 124, physicalAttGrowth: 11.7857, physicalDef: 16, physicalDefGrowth: 3.1429, magicDef: 15, magicDefGrowth: 1.6429, attSpeed: 1.08, attSpeedGrowth: 0.0185,skill:
+                [
+                    Skill(name:"Puncture",maxLevel:6,baseDamage:[100],baseDamageGrowth: [30], additionalDamage: [AddDamage(percentPhysical:0.5)],image:"puncture-skill",cooldown:14.0,cooldownGrowth: 0.4),
+                    Skill(name:"Thorned Rose",maxLevel:6,baseDamage:[170,170,170],baseDamageGrowth: [15,15,15], additionalDamage: [AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3)],image:"thorned-rose-skill",cooldown:14.0,cooldownGrowth: 0.4),
+                    Skill(name:"Phantom Execution",maxLevel:6,baseDamage:[100],baseDamageGrowth: [30], additionalDamage: [AddDamage(percentPhysical:0.5)],image:"phantom-execution-skill",cooldown:14.0,cooldownGrowth: 0.4),
+                ]
+            ),
+        Hero(name: "Tigreal", image:"tigreal-bg", avatar:"tigreal-avatar", role:"Tank", hp: 2690, hpGrowth: 292, mana: 450, manaGrowth: 100, physicalAtt: 112, physicalAttGrowth: 6.7857, physicalDef: 20, physicalDefGrowth: 5.3571, magicDef: 15, magicDefGrowth: 2.5, attSpeed: 1.03, attSpeedGrowth: 0.02,skill:
+                [
+                    Skill(name:"Puncture",maxLevel:6,baseDamage:[100],baseDamageGrowth: [30], additionalDamage: [AddDamage(percentPhysical:0.5)],image:"puncture-skill",cooldown:14.0,cooldownGrowth: 0.4),
+                    Skill(name:"Thorned Rose",maxLevel:6,baseDamage:[170,170,170],baseDamageGrowth: [15,15,15], additionalDamage: [AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3)],image:"thorned-rose-skill",cooldown:14.0,cooldownGrowth: 0.4),
+                    Skill(name:"Phantom Execution",maxLevel:6,baseDamage:[100],baseDamageGrowth: [30], additionalDamage: [AddDamage(percentPhysical:0.5)],image:"phantom-execution-skill",cooldown:14.0,cooldownGrowth: 0.4),
+                ]),
     ]
     @Binding var hero:Hero
     @Binding var current:Int?
@@ -113,7 +124,7 @@ struct HeroSheetView: View {
                     }.disabled(current == chosen)
                 }
             }.padding([.horizontal],16.0)
-                
+            
         }
     }
 }

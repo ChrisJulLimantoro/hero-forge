@@ -123,7 +123,7 @@ struct ItemSheetView: View {
                     let numberOfItems = items.count // Total number of items
                     
                         VStack(alignment:.leading) {
-                            ForEach(0..<itemsPerVStack) { itemIndex in
+                            ForEach(0..<itemsPerVStack, id:\.self) { itemIndex in
                                 HStack(alignment:.center){
                                     if current == itemIndex {
                                         Circle()

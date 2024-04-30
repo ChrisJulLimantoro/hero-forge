@@ -23,6 +23,8 @@
 		A428A9722BD8E6980096951F /* SkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A428A9712BD8E6980096951F /* SkillModel.swift */; };
 		A443D9222BDA0E7100DB37F0 /* AddDamageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A443D9212BDA0E7100DB37F0 /* AddDamageModel.swift */; };
 		A443D9252BDA4FC000DB37F0 /* EmblemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A443D9242BDA4FC000DB37F0 /* EmblemModel.swift */; };
+		A4494CBC2BE07B5400EAD37E /* CustomCircleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4494CBB2BE07B5400EAD37E /* CustomCircleComponent.swift */; };
+		A4494CBE2BE0830100EAD37E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4494CBD2BE0830100EAD37E /* ResultView.swift */; };
 		A46339A02BDE706B005EF0E4 /* CircleItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */; };
 		A4A665582BDAAEF40043C23D /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665572BDAAEF40043C23D /* ItemModel.swift */; };
 		A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665592BDAB5F40043C23D /* PassiveModel.swift */; };
@@ -65,6 +67,8 @@
 		A428A9712BD8E6980096951F /* SkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillModel.swift; sourceTree = "<group>"; };
 		A443D9212BDA0E7100DB37F0 /* AddDamageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDamageModel.swift; sourceTree = "<group>"; };
 		A443D9242BDA4FC000DB37F0 /* EmblemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmblemModel.swift; sourceTree = "<group>"; };
+		A4494CBB2BE07B5400EAD37E /* CustomCircleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleComponent.swift; sourceTree = "<group>"; };
+		A4494CBD2BE0830100EAD37E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleItemComponent.swift; sourceTree = "<group>"; };
 		A4A665572BDAAEF40043C23D /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		A4A665592BDAB5F40043C23D /* PassiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassiveModel.swift; sourceTree = "<group>"; };
@@ -100,6 +104,7 @@
 			children = (
 				A4100D0B2BDBFAA2002F954A /* ItemTileComponent.swift */,
 				A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */,
+				A4494CBB2BE07B5400EAD37E /* CustomCircleComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				A4100D052BDBB7D1002F954A /* HeroSheetView.swift */,
 				A4100D072BDBBE17002F954A /* EmblemSheetView.swift */,
 				A4100D092BDBBE4F002F954A /* ItemSheetView.swift */,
+				A4494CBD2BE0830100EAD37E /* ResultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,12 +328,14 @@
 				A4100D082BDBBE17002F954A /* EmblemSheetView.swift in Sources */,
 				A4100D0C2BDBFAA2002F954A /* ItemTileComponent.swift in Sources */,
 				A41D4D8F2BD799DD00668943 /* ContentView.swift in Sources */,
+				A4494CBE2BE0830100EAD37E /* ResultView.swift in Sources */,
 				A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */,
 				A443D9252BDA4FC000DB37F0 /* EmblemModel.swift in Sources */,
 				A443D9222BDA0E7100DB37F0 /* AddDamageModel.swift in Sources */,
 				A41D4D8D2BD799DD00668943 /* HeroForgeApp.swift in Sources */,
 				A41D4DBC2BD7A8EC00668943 /* HeroModel.swift in Sources */,
 				A4100D0A2BDBBE4F002F954A /* ItemSheetView.swift in Sources */,
+				A4494CBC2BE07B5400EAD37E /* CustomCircleComponent.swift in Sources */,
 				A4A665582BDAAEF40043C23D /* ItemModel.swift in Sources */,
 				A46339A02BDE706B005EF0E4 /* CircleItemComponent.swift in Sources */,
 				A428A9722BD8E6980096951F /* SkillModel.swift in Sources */,

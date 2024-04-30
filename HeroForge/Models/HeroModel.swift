@@ -13,6 +13,7 @@ struct Hero{
     var image:String = ""
     var avatar:String = ""
     var hp:Double = 0
+    var maxHp:Double = 0
     var hpGrowth:Double = 0
     var mana:Double = 0
     var manaGrowth:Double = 0
@@ -27,11 +28,7 @@ struct Hero{
     var attSpeedGrowth:Double = 0
     
 //    Fluctuative Stats
-    var skills:[String:Skill] = [
-        "skill1" : Skill(),
-        "skill2" : Skill(),
-        "skill3" : Skill()
-    ]
+    var skills:[Skill] = []
     var passives:[Passive] = []
     var emblems:[String:Emblem] = [
         "main" : Emblem(),
@@ -54,6 +51,7 @@ struct Hero{
             self.role = "Unselected"
             self.level = 1
             self.hp = 0
+            self.maxHp = 0
             self.hpGrowth = 0
             self.mana = 0
             self.manaGrowth = 0
@@ -74,13 +72,14 @@ struct Hero{
     }
     
 //    initialize
-    init(name: String, image:String, avatar:String, role:String, hp: Double, hpGrowth: Double, mana: Double, manaGrowth: Double, physicalAtt: Double, physicalAttGrowth: Double, physicalDef: Double, physicalDefGrowth: Double, magicDef: Double, magicDefGrowth: Double, attSpeed: Double, attSpeedGrowth: Double) {
+    init(name: String, image:String, avatar:String, role:String, hp: Double, hpGrowth: Double, mana: Double, manaGrowth: Double, physicalAtt: Double, physicalAttGrowth: Double, physicalDef: Double, physicalDefGrowth: Double, magicDef: Double, magicDefGrowth: Double, attSpeed: Double, attSpeedGrowth: Double,skill:[Skill]) {
         self.name = name
         self.image = image
         self.avatar = avatar
         self.role = role
         self.level = 1
         self.hp = hp
+        self.maxHp = hp
         self.hpGrowth = hpGrowth
         self.mana = mana
         self.manaGrowth = manaGrowth
@@ -93,6 +92,7 @@ struct Hero{
         self.magicDefGrowth = magicDefGrowth
         self.attSpeed = attSpeed
         self.attSpeedGrowth = attSpeedGrowth
+        self.skills = skill
     }
     
     mutating func setHero(hero:Hero){
@@ -102,6 +102,7 @@ struct Hero{
         self.role = hero.role
         self.level = 1
         self.hp = hero.hp
+        self.maxHp = hero.maxHp
         self.hpGrowth = hero.hpGrowth
         self.mana = hero.mana
         self.manaGrowth = hero.manaGrowth
@@ -114,6 +115,7 @@ struct Hero{
         self.magicDefGrowth = hero.magicDefGrowth
         self.attSpeed = hero.attSpeed
         self.attSpeedGrowth = hero.attSpeedGrowth
+        self.skills = hero.skills
     }
     
     mutating func levelUp()->Bool{
@@ -121,6 +123,7 @@ struct Hero{
             return false
         }
         self.hp += self.hpGrowth
+        self.maxHp += self.hpGrowth
         self.mana += self.manaGrowth
         self.attSpeed += self.attSpeedGrowth
         self.physicalAtt += self.physicalAttGrowth
@@ -134,7 +137,12 @@ struct Hero{
         guard self.level > 1 else {
             return false
         }
-        self.hp -= self.hpGrowth
+        if self.hp < 0 {
+            self.hp = 0
+        }else {
+            self.hp -= self.hpGrowth
+        }
+        self.maxHp -= self.hpGrowth
         self.mana -= self.manaGrowth
         self.attSpeed -= self.attSpeedGrowth
         self.physicalAtt -= self.physicalAttGrowth
@@ -144,13 +152,12 @@ struct Hero{
         return true
     }
     
-    mutating func skillLevelUp(skillIndex: String) -> Bool {
-        guard var skill = self.skills[skillIndex] else {
+    mutating func skillLevelUp(skillIndex: Int) -> Bool {
+        guard skillIndex < self.skills.count else {
             // Handle case where skillIndex is not found in the dictionary
             return false
         }
-        
-        guard skill.levelUp() else {
+        guard self.skills[skillIndex].levelUp() else {
             return false
         }
         
@@ -162,13 +169,12 @@ struct Hero{
     }
 
     
-    mutating func skillLevelDown(skillIndex: String)->Bool{
-        guard var skill = self.skills[skillIndex] else {
+    mutating func skillLevelDown(skillIndex: Int)->Bool{
+        guard skillIndex < self.skills.count else {
             // Handle case where skillIndex is not found in the dictionary
             return false
         }
-        
-        guard skill.levelDown() else {
+        guard self.skills[skillIndex].levelDown() else {
             return false
         }
         
@@ -179,20 +185,28 @@ struct Hero{
         return true
     }
     
-    func getCurrentHealth()->Double{
-        return self.hp
-    }
-    
     mutating func calculateDamage(){
         
     }
     
-    mutating func calculateDamageSkill(index: Int){
-        
+    mutating func calculateDamageSkill(index: Int)->Double{
+        var dmg:Double = 0.0
+        for i in 0..<self.skills[index].baseDamage.count{
+            dmg += self.skills[index].baseDamage[i] + self.skills[index].additionalDamage[i].calculateDamage(physical:self.physicalAtt, magic: self.magicPower,enemyCurrentHealth: nil)
+        }
+        return dmg
     }
     
-    mutating func takeDamage(dmg:Double,pen:Double,percPen:Double){
-        
+    mutating func takeDamage(dmg:Double,pen:Double,percPen:Double)->Bool{
+        guard self.hp > 0 else {
+            return false
+        }
+        guard self.hp - dmg > 0 else {
+            self.hp = 0
+            return false
+        }
+        self.hp -= dmg
+        return true
     }
     
     mutating func setPassive(passive:Passive){

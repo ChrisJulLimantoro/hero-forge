@@ -37,7 +37,7 @@ struct MainSheetView:View {
                             .padding([.bottom],-4.0)
                         HStack{
                             if tempHero.avatar == "" {
-                                CircleItem(image:"empty", size:50, strokeColor: Color.gray)
+                                CustomCircleComponent(size:50,strokeColor: Color.gray, line: 2)
                             }else {
                                 CircleItem(image:tempHero.avatar, size:50, strokeColor: Color.gray)
                             }
@@ -77,8 +77,8 @@ struct MainSheetView:View {
                             .padding([.bottom],-4.0)
                         HStack{
                             VStack{
-                                if tempHero.emblems["main"]!.image == "" {
-                                    CircleItem(image:"default", size:60, strokeColor: Color.gray)
+                                if tempHero.emblems["main"]!.image == "empty" {
+                                    CustomCircleComponent(size:60,strokeColor: Color.gray, line: 2)
                                 }else {
                                     CircleItem(image:tempHero.emblems["main"]!.image, size:60, strokeColor: Color.gray)
                                 }
@@ -92,8 +92,8 @@ struct MainSheetView:View {
                             Spacer()
                             HStack{
                                 VStack{
-                                    if tempHero.emblems["sub1"]!.image == "" {
-                                        CircleItem(image:"default", size:50, strokeColor: Color.gray)
+                                    if tempHero.emblems["sub1"]!.image == "empty" {
+                                        CustomCircleComponent(size:50,strokeColor: Color.gray, line: 2)
                                     }else {
                                         CircleItem(image:tempHero.emblems["sub1"]!.image, size:50, strokeColor: Color.gray)
                                     }
@@ -106,8 +106,8 @@ struct MainSheetView:View {
                                     emblemType = "sub1"
                                 }
                                 VStack{
-                                    if tempHero.emblems["sub2"]!.image == "" {
-                                        CircleItem(image:"default", size:50, strokeColor: Color.gray)
+                                    if tempHero.emblems["sub2"]!.image == "empty" {
+                                        CustomCircleComponent(size:50,strokeColor: Color.gray, line: 2)
                                     }else {
                                         CircleItem(image:tempHero.emblems["sub2"]!.image, size:50, strokeColor: Color.gray)
                                     }
@@ -120,8 +120,8 @@ struct MainSheetView:View {
                                     emblemType = "sub2"
                                 }
                                 VStack{
-                                    if tempHero.emblems["sub3"]!.image == "" {
-                                        CircleItem(image:"default", size:50, strokeColor: Color.gray)
+                                    if tempHero.emblems["sub3"]!.image == "empty" {
+                                        CustomCircleComponent(size:50,strokeColor: Color.gray, line: 2)
                                     }else {
                                         CircleItem(image:tempHero.emblems["sub3"]!.image, size:50, strokeColor: Color.gray)
                                     }
