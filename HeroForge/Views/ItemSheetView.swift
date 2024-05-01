@@ -55,7 +55,7 @@ struct ItemSheetView: View {
                                         .fontDesign(.rounded)
                                 }
                             }else{
-                                CircleItem(image: "empty", size:50, strokeColor: Color.gray)
+                                CustomCircleComponent(size:50, strokeColor: Color.gray,line:2)
                                 VStack(alignment:.leading){
                                     Text("Unselected")
                                         .font(.title2)
@@ -159,7 +159,7 @@ struct ItemSheetView: View {
                         .padding()
                         
                         VStack(alignment: .leading) {
-                            ForEach(itemsPerVStack..<numberOfItems) { itemIndex in
+                            ForEach(itemsPerVStack..<numberOfItems, id:\.self) { itemIndex in
                                 HStack(alignment:.center){
                                     if current == itemIndex {
                                         Circle()

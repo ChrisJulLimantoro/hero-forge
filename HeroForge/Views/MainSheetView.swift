@@ -25,6 +25,18 @@ struct MainSheetView:View {
     @State var emblemType = ""
     @State var itemIndex = 0
     
+    init(selectedHeroes:Binding<[Hero]>, indexHero:Binding<Int>, chosenHero:Binding<Int?>, currentHero:Binding<Int?>, chosenEmblem:Binding<[String:Int?]>, currentEmblem:Binding<[String:Int?]>, chosenItem:Binding<[Int?]>, currentItem:Binding<[Int?]>){
+        self._selectedHeroes = selectedHeroes
+        self._indexHero = indexHero
+        self._chosenHero = chosenHero
+        self._currentHero = currentHero
+        self._chosenEmblem = chosenEmblem
+        self._currentEmblem = currentEmblem
+        self._chosenItem = chosenItem
+        self._currentItem = currentItem
+        self._tempHero = State(initialValue: selectedHeroes.wrappedValue[indexHero.wrappedValue])
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -52,8 +64,8 @@ struct MainSheetView:View {
                                 .foregroundStyle(.gray)
                                 .fontDesign(.rounded)
                         }.onTapGesture {
-                            isPresented = true
                             typePresented = 0
+                            isPresented = true
                         }
                         .padding(16.0)
                         .background(
@@ -85,9 +97,9 @@ struct MainSheetView:View {
                                 Text(tempHero.emblems["main"]!.name == "" ? "Unselected" : tempHero.emblems["main"]!.name).fontWeight(.semibold).font(.caption).fontDesign(.rounded)
                                 Text("main emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                             }.onTapGesture{
-                                isPresented = true
                                 typePresented = 1
                                 emblemType = "main"
+                                isPresented = true
                             }
                             Spacer()
                             HStack{
@@ -101,9 +113,9 @@ struct MainSheetView:View {
                                     Text("sub-emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                                 }
                                 .onTapGesture{
-                                    isPresented = true
                                     typePresented = 1
                                     emblemType = "sub1"
+                                    isPresented = true
                                 }
                                 VStack{
                                     if tempHero.emblems["sub2"]!.image == "empty" {
@@ -115,9 +127,9 @@ struct MainSheetView:View {
                                     Text("sub-emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                                 }
                                 .onTapGesture{
-                                    isPresented = true
                                     typePresented = 1
                                     emblemType = "sub2"
+                                    isPresented = true
                                 }
                                 VStack{
                                     if tempHero.emblems["sub3"]!.image == "empty" {
@@ -129,9 +141,9 @@ struct MainSheetView:View {
                                     Text("sub-emblem").fontWeight(.light).font(.caption).foregroundStyle(.gray).fontDesign(.rounded)
                                 }
                                 .onTapGesture{
-                                    isPresented = true
                                     typePresented = 1
                                     emblemType = "sub3"
+                                    isPresented = true
                                 }
                             }
                         }

@@ -16,6 +16,7 @@ struct Skill {
     var passive:Passive = Passive()
     var cooldown:Double = 0
     var cooldownGrowth:Double = 0
+    var sound:String = ""
     
     init(){
         self.level = 0
@@ -28,7 +29,7 @@ struct Skill {
         self.cooldown = 0
     }
     
-    init(name:String,maxLevel: Double,baseDamage: [Double],baseDamageGrowth:[Double], additionalDamage: [AddDamage],image:String,cooldown:Double,cooldownGrowth:Double) {
+    init(name:String,maxLevel: Double,baseDamage: [Double],baseDamageGrowth:[Double], additionalDamage: [AddDamage],image:String,cooldown:Double,cooldownGrowth:Double,sound:String) {
         self.name = name
         self.level = 0
         self.maxLevel = maxLevel
@@ -38,6 +39,7 @@ struct Skill {
         self.additionalDamage = additionalDamage
         self.cooldown = cooldown
         self.cooldownGrowth = cooldownGrowth
+        self.sound = sound
     }
     
     mutating func levelUp()->Bool{
@@ -45,6 +47,7 @@ struct Skill {
             return false
         }
         self.level += 1
+        self.cooldown -= self.cooldownGrowth
         
         for index in 0..<self.baseDamage.count{
             self.baseDamage[index] += self.baseDamageGrowth[index]
@@ -57,6 +60,7 @@ struct Skill {
             return false
         }
         self.level -= 1
+        self.cooldown += self.cooldownGrowth
         for index in 0..<self.baseDamage.count{
             self.baseDamage[index] -= self.baseDamageGrowth[index]
         }

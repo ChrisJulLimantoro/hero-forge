@@ -9,7 +9,7 @@
 struct Hero{
     var name:String = "Unselected"
     var role:String = "Unselected"
-    var level:Int = 1
+    var level:Int = 0
     var image:String = ""
     var avatar:String = ""
     var hp:Double = 0
@@ -26,6 +26,7 @@ struct Hero{
     var magicDefGrowth:Double = 0
     var attSpeed:Double = 0
     var attSpeedGrowth:Double = 0
+    var basicSound:String = ""
     
 //    Fluctuative Stats
     var skills:[Skill] = []
@@ -72,7 +73,7 @@ struct Hero{
     }
     
 //    initialize
-    init(name: String, image:String, avatar:String, role:String, hp: Double, hpGrowth: Double, mana: Double, manaGrowth: Double, physicalAtt: Double, physicalAttGrowth: Double, physicalDef: Double, physicalDefGrowth: Double, magicDef: Double, magicDefGrowth: Double, attSpeed: Double, attSpeedGrowth: Double,skill:[Skill]) {
+    init(name: String, image:String, avatar:String, role:String, hp: Double, hpGrowth: Double, mana: Double, manaGrowth: Double, physicalAtt: Double, physicalAttGrowth: Double, physicalDef: Double, physicalDefGrowth: Double, magicDef: Double, magicDefGrowth: Double, attSpeed: Double, attSpeedGrowth: Double,skill:[Skill],basicSound:String) {
         self.name = name
         self.image = image
         self.avatar = avatar
@@ -93,6 +94,7 @@ struct Hero{
         self.attSpeed = attSpeed
         self.attSpeedGrowth = attSpeedGrowth
         self.skills = skill
+        self.basicSound = basicSound
     }
     
     mutating func setHero(hero:Hero){
@@ -116,6 +118,7 @@ struct Hero{
         self.attSpeed = hero.attSpeed
         self.attSpeedGrowth = hero.attSpeedGrowth
         self.skills = hero.skills
+        self.basicSound = hero.basicSound
     }
     
     mutating func levelUp()->Bool{
@@ -167,6 +170,11 @@ struct Hero{
         
         return true
     }
+    
+    mutating func revive()->Bool{
+        self.hp = self.maxHp
+        return true
+    }
 
     
     mutating func skillLevelDown(skillIndex: Int)->Bool{
@@ -185,16 +193,29 @@ struct Hero{
         return true
     }
     
-    mutating func calculateDamage(){
-        
+//    Calculate Damage Basic Attack
+    mutating func calculateDamage()->Double{
+        guard self.level > 0 else {
+            return 0
+        }
+        return self.physicalAtt
     }
     
+//    Calculate Damage Skill based on Index Skill
     mutating func calculateDamageSkill(index: Int)->Double{
+        guard self.level > 0 else {
+            return 0
+        }
         var dmg:Double = 0.0
         for i in 0..<self.skills[index].baseDamage.count{
             dmg += self.skills[index].baseDamage[i] + self.skills[index].additionalDamage[i].calculateDamage(physical:self.physicalAtt, magic: self.magicPower,enemyCurrentHealth: nil)
         }
         return dmg
+    }
+    
+//    Equip Item based on Item
+    mutating func equip(item:Item) {
+        
     }
     
     mutating func takeDamage(dmg:Double,pen:Double,percPen:Double)->Bool{

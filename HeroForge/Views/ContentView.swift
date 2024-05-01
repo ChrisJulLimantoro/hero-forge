@@ -28,7 +28,7 @@ struct ContentView: View {
                     VStack(spacing:0) {
                         ZStack{
                             Rectangle()
-                                .frame(width: .infinity, height: gp.size.height/2)
+                                .frame(height: gp.size.height/2)
                                 .foregroundStyle(
                                     LinearGradient(gradient: Gradient(colors: [.init(red: 34/255, green: 100/255, blue: 177/255), .clear]), startPoint: .init(x:0.8,y:0.7), endPoint: .top)
                                 )
@@ -36,12 +36,12 @@ struct ContentView: View {
                                     Image(selectedHeroes[0].image)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width:.infinity, height: gp.size.height/2 , alignment: .top)
+                                        .frame(height: gp.size.height/2 , alignment: .top)
                                         .clipped()
                                 }
                                 .onTapGesture{
-                                    isPresented = true
                                     indexHero = 0
+                                    isPresented = true
                                 }
                             VStack{
                                 Spacer()
@@ -92,7 +92,7 @@ struct ContentView: View {
                         }
                         ZStack{
                             Rectangle()
-                                .frame(width: .infinity, height: gp.size.height/2)
+                                .frame(height: gp.size.height/2)
                                 .foregroundStyle(
                                     LinearGradient(gradient: Gradient(colors: [.init(red: 159/255, green: 0, blue: 0), .clear]), startPoint: .init(x:0.2,y:0.2), endPoint: .bottom)
                                 )
@@ -100,12 +100,12 @@ struct ContentView: View {
                                     Image(selectedHeroes[1].image)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width:.infinity, height: gp.size.height/2 , alignment: .top)
+                                        .frame(height: gp.size.height/2 , alignment: .top)
                                         .clipped()
                                 }
                                 .onTapGesture{
-                                    isPresented = true
                                     indexHero = 1
+                                    isPresented = true
                                 }
                             VStack{
                                 HStack(alignment:.top){
@@ -159,7 +159,13 @@ struct ContentView: View {
                             }
                         }
                     }
-                    NavigationLink(destination: ResultView(selectedHeroes: selectedHeroes),label:{
+                    NavigationLink(destination: ResultView(
+                        selectedHeroes: selectedHeroes,
+                        chosenItem: chosenItem,
+                        currentItem:currentItem,
+                        chosenEmblem: chosenEmblem,
+                        currentEmblem: currentEmblem
+                    ),label:{
                         Image("vs-button")
                             .resizable()
                             .frame(width:gp.size.width/3.5,height:gp.size.width/3.5)
@@ -176,8 +182,7 @@ struct ContentView: View {
                     chosenEmblem:$chosenEmblem[indexHero],
                     currentEmblem:$currentEmblem[indexHero],
                     chosenItem:$chosenItem[indexHero],
-                    currentItem:$currentItem[indexHero],
-                    tempHero: selectedHeroes[indexHero]
+                    currentItem:$currentItem[indexHero]
                 )
                 .presentationDetents([.large])
                 .presentationBackgroundInteraction(.disabled)

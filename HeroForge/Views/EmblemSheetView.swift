@@ -75,7 +75,7 @@ struct EmblemSheetView: View {
                         HStack{
                             Spacer()
                             if current == nil {
-                                CircleItem(image: "empty", size:50, strokeColor: Color.gray)
+                                CustomCircleComponent(size:50, strokeColor: Color.gray,line:2)
                                 VStack(alignment:.leading){
                                     Text("Unselected")
                                         .font(.title2)

@@ -26,6 +26,16 @@
 		A4494CBC2BE07B5400EAD37E /* CustomCircleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4494CBB2BE07B5400EAD37E /* CustomCircleComponent.swift */; };
 		A4494CBE2BE0830100EAD37E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4494CBD2BE0830100EAD37E /* ResultView.swift */; };
 		A46339A02BDE706B005EF0E4 /* CircleItemComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */; };
+		A46B3FAF2BE1E88700F41DD7 /* SkillTileComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B3FAE2BE1E88700F41DD7 /* SkillTileComponent.swift */; };
+		A46B3FB12BE1EF3B00F41DD7 /* SkillLevelingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B3FB02BE1EF3B00F41DD7 /* SkillLevelingComponent.swift */; };
+		A46B3FB32BE208E800F41DD7 /* GlowFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B3FB22BE208E800F41DD7 /* GlowFeature.swift */; };
+		A46B3FBC2BE2156A00F41DD7 /* TemporarySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46B3FBB2BE2156A00F41DD7 /* TemporarySheetView.swift */; };
+		A46B3FC32BE232B500F41DD7 /* close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FBD2BE232B500F41DD7 /* close.mp3 */; };
+		A46B3FC42BE232B500F41DD7 /* lancelot-skill-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FBE2BE232B500F41DD7 /* lancelot-skill-3.mp3 */; };
+		A46B3FC52BE232B500F41DD7 /* lancelot-skill-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FBF2BE232B500F41DD7 /* lancelot-skill-2.mp3 */; };
+		A46B3FC72BE232B500F41DD7 /* selection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FC12BE232B500F41DD7 /* selection.mp3 */; };
+		A46B3FCA2BE232D200F41DD7 /* lancelot-basic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FC92BE232D200F41DD7 /* lancelot-basic.mp3 */; };
+		A46B3FCC2BE233C200F41DD7 /* lancelot-skill-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FCB2BE233C200F41DD7 /* lancelot-skill-1.mp3 */; };
 		A4A665582BDAAEF40043C23D /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665572BDAAEF40043C23D /* ItemModel.swift */; };
 		A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665592BDAB5F40043C23D /* PassiveModel.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +80,16 @@
 		A4494CBB2BE07B5400EAD37E /* CustomCircleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleComponent.swift; sourceTree = "<group>"; };
 		A4494CBD2BE0830100EAD37E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleItemComponent.swift; sourceTree = "<group>"; };
+		A46B3FAE2BE1E88700F41DD7 /* SkillTileComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillTileComponent.swift; sourceTree = "<group>"; };
+		A46B3FB02BE1EF3B00F41DD7 /* SkillLevelingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillLevelingComponent.swift; sourceTree = "<group>"; };
+		A46B3FB22BE208E800F41DD7 /* GlowFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlowFeature.swift; sourceTree = "<group>"; };
+		A46B3FBB2BE2156A00F41DD7 /* TemporarySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporarySheetView.swift; sourceTree = "<group>"; };
+		A46B3FBD2BE232B500F41DD7 /* close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = close.mp3; sourceTree = "<group>"; };
+		A46B3FBE2BE232B500F41DD7 /* lancelot-skill-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "lancelot-skill-3.mp3"; sourceTree = "<group>"; };
+		A46B3FBF2BE232B500F41DD7 /* lancelot-skill-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "lancelot-skill-2.mp3"; sourceTree = "<group>"; };
+		A46B3FC12BE232B500F41DD7 /* selection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = selection.mp3; sourceTree = "<group>"; };
+		A46B3FC92BE232D200F41DD7 /* lancelot-basic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "lancelot-basic.mp3"; sourceTree = "<group>"; };
+		A46B3FCB2BE233C200F41DD7 /* lancelot-skill-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "lancelot-skill-1.mp3"; sourceTree = "<group>"; };
 		A4A665572BDAAEF40043C23D /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		A4A665592BDAB5F40043C23D /* PassiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassiveModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +125,8 @@
 				A4100D0B2BDBFAA2002F954A /* ItemTileComponent.swift */,
 				A463399F2BDE706B005EF0E4 /* CircleItemComponent.swift */,
 				A4494CBB2BE07B5400EAD37E /* CustomCircleComponent.swift */,
+				A46B3FAE2BE1E88700F41DD7 /* SkillTileComponent.swift */,
+				A46B3FB02BE1EF3B00F41DD7 /* SkillLevelingComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -132,13 +154,14 @@
 		A41D4D8B2BD799DD00668943 /* HeroForge */ = {
 			isa = PBXGroup;
 			children = (
+				A46B3FB92BE20E4600F41DD7 /* sound */,
 				A4100D022BDBAF9F002F954A /* Components */,
 				A443D9232BDA4F9F00DB37F0 /* Models */,
 				A41D4DBA2BD7A2CD00668943 /* Views */,
 				A41D4D8C2BD799DD00668943 /* HeroForgeApp.swift */,
-				A41D4D8E2BD799DD00668943 /* ContentView.swift */,
 				A41D4D902BD799DF00668943 /* Assets.xcassets */,
 				A41D4D922BD799DF00668943 /* Preview Content */,
+				A46B3FB22BE208E800F41DD7 /* GlowFeature.swift */,
 			);
 			path = HeroForge;
 			sourceTree = "<group>";
@@ -171,11 +194,13 @@
 		A41D4DBA2BD7A2CD00668943 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A41D4D8E2BD799DD00668943 /* ContentView.swift */,
 				A4100D002BDB9931002F954A /* MainSheetView.swift */,
 				A4100D052BDBB7D1002F954A /* HeroSheetView.swift */,
 				A4100D072BDBBE17002F954A /* EmblemSheetView.swift */,
 				A4100D092BDBBE4F002F954A /* ItemSheetView.swift */,
 				A4494CBD2BE0830100EAD37E /* ResultView.swift */,
+				A46B3FBB2BE2156A00F41DD7 /* TemporarySheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +216,19 @@
 				A4A665592BDAB5F40043C23D /* PassiveModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A46B3FB92BE20E4600F41DD7 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				A46B3FCB2BE233C200F41DD7 /* lancelot-skill-1.mp3 */,
+				A46B3FC92BE232D200F41DD7 /* lancelot-basic.mp3 */,
+				A46B3FBD2BE232B500F41DD7 /* close.mp3 */,
+				A46B3FBF2BE232B500F41DD7 /* lancelot-skill-2.mp3 */,
+				A46B3FBE2BE232B500F41DD7 /* lancelot-skill-3.mp3 */,
+				A46B3FC12BE232B500F41DD7 /* selection.mp3 */,
+			);
+			path = sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,7 +335,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A46B3FCA2BE232D200F41DD7 /* lancelot-basic.mp3 in Resources */,
+				A46B3FC72BE232B500F41DD7 /* selection.mp3 in Resources */,
+				A46B3FC52BE232B500F41DD7 /* lancelot-skill-2.mp3 in Resources */,
+				A46B3FC42BE232B500F41DD7 /* lancelot-skill-3.mp3 in Resources */,
+				A46B3FC32BE232B500F41DD7 /* close.mp3 in Resources */,
 				A41D4D942BD799DF00668943 /* Preview Assets.xcassets in Resources */,
+				A46B3FCC2BE233C200F41DD7 /* lancelot-skill-1.mp3 in Resources */,
 				A41D4D912BD799DF00668943 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,12 +368,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4100D062BDBB7D1002F954A /* HeroSheetView.swift in Sources */,
+				A46B3FAF2BE1E88700F41DD7 /* SkillTileComponent.swift in Sources */,
+				A46B3FBC2BE2156A00F41DD7 /* TemporarySheetView.swift in Sources */,
 				A4100D012BDB9931002F954A /* MainSheetView.swift in Sources */,
 				A4100D082BDBBE17002F954A /* EmblemSheetView.swift in Sources */,
 				A4100D0C2BDBFAA2002F954A /* ItemTileComponent.swift in Sources */,
+				A46B3FB12BE1EF3B00F41DD7 /* SkillLevelingComponent.swift in Sources */,
 				A41D4D8F2BD799DD00668943 /* ContentView.swift in Sources */,
 				A4494CBE2BE0830100EAD37E /* ResultView.swift in Sources */,
 				A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */,
+				A46B3FB32BE208E800F41DD7 /* GlowFeature.swift in Sources */,
 				A443D9252BDA4FC000DB37F0 /* EmblemModel.swift in Sources */,
 				A443D9222BDA0E7100DB37F0 /* AddDamageModel.swift in Sources */,
 				A41D4D8D2BD799DD00668943 /* HeroForgeApp.swift in Sources */,
