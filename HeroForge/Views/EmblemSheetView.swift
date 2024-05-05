@@ -15,45 +15,46 @@ struct EmblemSheetView: View {
     @State var current:Int?
     @State var search:String = ""
     @Binding var hero:Hero
+    @State var soundFeature = SoundFeature()
     var data:[String:[Emblem]] = [
         "main" : [
-            Emblem(name:"Assassin",image:"assassin-emblem",textAtt: ["+ 14 Adaptive Penetration","+ 10 Adaptive Attack","+ 3% Movement Speed"]),
-            Emblem(name:"Common",image:"common-emblem",textAtt: ["+ 12 Hybrid Regen","+ 275 HP","+ 22 Adaptive Attack"]),
-            Emblem(name:"tank",image:"tank-emblem",textAtt: ["+ 500 HP","+ 10 Hybrid Defense","+ 4 HP Regen"]),
-            Emblem(name:"Mage",image:"mage-emblem",textAtt: ["+ 30 Magic Power","+ 5% Cooldown Reduction","+ 8 Magic Penetration"]),
-            Emblem(name:"Fighter",image:"fighter-emblem",textAtt: ["+ 10% Spell Vamp","+ 22 Adaptive Attack","+ 6 Hybrid Defense"]),
-            Emblem(name:"Marksman",image:"marksman-emblem",textAtt: ["+ 15% Attack Speed","+ 5% Adaptive Attack","+ 5% Lifesteal"]),
-            Emblem(name:"Support",image:"support-emblem",textAtt: ["+ 12% Healing Effect","+ 10% Cooldown Reduction", "+ 6% Movement Speed"])
+            Emblem(id:1,name:"Assassin",image:"assassin-emblem",textAtt: ["+ 14 Adaptive Penetration","+ 10 Adaptive Attack","+ 3% Movement Speed"], atk:10, pen:14),
+            Emblem(id:2,name:"Common",image:"common-emblem",textAtt: ["+ 12 Hybrid Regen","+ 275 HP","+ 22 Adaptive Attack"],hp:275,atk:22),
+            Emblem(id:3,name:"tank",image:"tank-emblem",textAtt: ["+ 500 HP","+ 10 Hybrid Defense","+ 4 HP Regen"],hp:500,hyDef:10),
+            Emblem(id:4,name:"Mage",image:"mage-emblem",textAtt: ["+ 30 Magic Power","+ 5% Cooldown Reduction","+ 8 Magic Penetration"],magic: 30,magPen:8,cooldown:0.05),
+            Emblem(id:5,name:"Fighter",image:"fighter-emblem",textAtt: ["+ 10% Spell Vamp","+ 22 Adaptive Attack","+ 6 Hybrid Defense"],atk:22,hyDef:6),
+            Emblem(id:6,name:"Marksman",image:"marksman-emblem",addDamage:AddDamage(percentPhysical:0.05),textAtt: ["+ 15% Attack Speed","+ 5% Adaptive Attack","+ 5% Lifesteal"]),
+            Emblem(id:7,name:"Support",image:"support-emblem",textAtt: ["+ 12% Healing Effect","+ 10% Cooldown Reduction", "+ 6% Movement Speed"],cooldown:0.1)
         ],
         "sub1" : [
-            Emblem(name:"Thrill", image:"thrill-emblem", textAtt:["+ 16 Adaptive Attack"]),
-            Emblem(name:"Swift",image:"swift-emblem",textAtt:["+ 10% Attack Speed"]),
-            Emblem(name:"Vitality",image:"vitality-emblem",textAtt:["+ 225 HP"]),
-            Emblem(name:"Rupture",image:"rupture-emblem",textAtt:["+ 5 Adaptive Penetration"]),
-            Emblem(name:"Inspire",image:"inspire-emblem",textAtt: ["+ 5% Cooldown Reduction"]),
-            Emblem(name:"Firmness",image:"firmness-emblem",textAtt:["+ 6 Hybrid Defense"]),
-            Emblem(name:"Agility",image:"agility-emblem",textAtt:["+ 4% Movement Speed"]),
-            Emblem(name:"Fatal",image:"fatal-emblem",textAtt:["+ 5% Critical Chance","+ 10% Critical Damage"]),
+            Emblem(id:11,name:"Thrill", image:"thrill-emblem", textAtt:["+ 16 Adaptive Attack"],atk:16),
+            Emblem(id:12,name:"Swift",image:"swift-emblem",textAtt:["+ 10% Attack Speed"]),
+            Emblem(id:13,name:"Vitality",image:"vitality-emblem",textAtt:["+ 225 HP"],hp:225),
+            Emblem(id:14,name:"Rupture",image:"rupture-emblem",textAtt:["+ 5 Adaptive Penetration"],pen:5),
+            Emblem(id:15,name:"Inspire",image:"inspire-emblem",textAtt: ["+ 5% Cooldown Reduction"],cooldown:0.05),
+            Emblem(id:16,name:"Firmness",image:"firmness-emblem",textAtt:["+ 6 Hybrid Defense"],hyDef:6),
+            Emblem(id:17,name:"Agility",image:"agility-emblem",textAtt:["+ 4% Movement Speed"]),
+            Emblem(id:18,name:"Fatal",image:"fatal-emblem",textAtt:["+ 5% Critical Chance","+ 10% Critical Damage"]),
         ],
         "sub2" : [
-            Emblem(name:"Wilderness Blessing", image:"wb-emblem", textAtt: ["+ 10% Movement Speed in Jungle and River"]),
-            Emblem(name:"Seasoned Hunter", image:"sh-emblem", textAtt: ["+ 15% Damage against Lord and Turtle"]),
-            Emblem(name:"Tenacity", image:"tenacity-emblem",textAtt:["+ 15 Hybrid Defense when HP < 50%"]),
-            Emblem(name:"Master Assassin",image:"ma-emblem",textAtt:["+ 7% Damage when 1 vs 1"]),
-            Emblem(name:"Bargain Hunter",image:"bh-emblem",textAtt:["- 5% Price of Item"]),
-            Emblem(name:"Festival of Blood",image:"fob-emblem",textAtt:["+ 6%-10& Spell Vamp"]),
-            Emblem(name:"Pull Yourself Together",image:"pyt-emblem",textAtt:["- 15% Cooldown Reduction on Battle Spell"]),
-            Emblem(name:"Weapons Master",image:"wm-emblem",textAtt:["+ 5% Attack on All Equipment"])
+            Emblem(id:21,name:"Wilderness Blessing", image:"wb-emblem", textAtt: ["+ 10% Movement Speed in Jungle and River"]),
+            Emblem(id:22,name:"Seasoned Hunter", image:"sh-emblem", textAtt: ["+ 15% Damage against Lord and Turtle"]),
+            Emblem(id:23,name:"Tenacity", image:"tenacity-emblem",textAtt:["+ 15 Hybrid Defense when HP < 50%"],belowDef: 15),
+            Emblem(id:24,name:"Master Assassin",image:"ma-emblem",addDamage:AddDamage(percentPhysical:0.07),textAtt:["+ 7% Damage when 1 vs 1"]),
+            Emblem(id:25,name:"Bargain Hunter",image:"bh-emblem",textAtt:["- 5% Price of Item"],itemReduction: 0.05),
+            Emblem(id:26,name:"Festival of Blood",image:"fob-emblem",textAtt:["+ 6%-10& Spell Vamp"]),
+            Emblem(id:27,name:"Pull Yourself Together",image:"pyt-emblem",textAtt:["- 15% Cooldown Reduction on Battle Spell"]),
+            Emblem(id:28,name:"Weapons Master",image:"wm-emblem",textAtt:["+ 5% Attack on All Equipment"],increaseAllAtk: 0.05)
         ],
         "sub3" : [
-            Emblem(name:"Impure Rage",image:"ir-emblem",textAtt:["+ 44-240 Adaptive Damage","restore 2% Mana on hit"]),
-            Emblem(name:"Quantum Charge",image:"qc-emblem",textAtt:["+ 30% Movement Speed for 1.5s on hit"]),
-            Emblem(name:"Concussive Blast",image:"cb-emblem",textAtt:["dealing 100 + 7% total HP after the next Basic Attack"]),
-            Emblem(name:"Killing Spree",image:"ks-emblem",textAtt:["recover 15% losing HP after killing hero","+ 20% Movement Speed after killing hero"]),
-            Emblem(name:"Lethal Ignition",image:"li-emblem",textAtt: ["+ 162-750 Adaptive Damage"]),
-            Emblem(name:"Brave Smite",image:"bs-emblem",textAtt: ["Recovers 5% of Max HP after dealing Skill damage"]),
-            Emblem(name:"Focusing Mark",image:"fm-emblem",textAtt:["Increase 6% damage for Allied Hero"]),
-            Emblem(name:"Weakness Finder",image:"wf-emblem",textAtt:["- 50% Movement Speed for 1s","- 30% Attack Speed for 1s"])
+            Emblem(id:31,name:"Impure Rage",image:"ir-emblem",textAtt:["+ 44-240 Adaptive Damage","restore 2% Mana on hit"],skillDmg:44,skillDmgGrowth: 13.07),
+            Emblem(id:32,name:"Quantum Charge",image:"qc-emblem",textAtt:["+ 30% Movement Speed for 1.5s on hit"]),
+            Emblem(id:33,name:"Concussive Blast",image:"cb-emblem",textAtt:["dealing 100 + 7% total HP after the next Basic Attack"]),
+            Emblem(id:34,name:"Killing Spree",image:"ks-emblem",textAtt:["recover 15% losing HP after killing hero","+ 20% Movement Speed after killing hero"]),
+            Emblem(id:35,name:"Lethal Ignition",image:"li-emblem",textAtt: ["+ 162-750 Adaptive Damage after every 3 hit with over 7% damage"]),
+            Emblem(id:36,name:"Brave Smite",image:"bs-emblem",textAtt: ["Recovers 5% of Max HP after dealing Skill damage"]),
+            Emblem(id:37,name:"Focusing Mark",image:"fm-emblem",textAtt:["Increase 6% damage for Allied Hero"]),
+            Emblem(id:38,name:"Weakness Finder",image:"wf-emblem",textAtt:["- 50% Movement Speed for 1s","- 30% Attack Speed for 1s"])
         ]
     ]
     var useData:[Emblem] {
@@ -88,9 +89,9 @@ struct EmblemSheetView: View {
                                         .fontDesign(.rounded)
                                 }
                             }else{
-                                CircleItem(image: data[currentType]![current!].image, size:50, strokeColor: Color.gray)
+                                CircleItem(image: data[currentType]!.first(where: { $0.id == current})!.image, size:50, strokeColor: Color.gray)
                                 VStack(alignment:.leading){
-                                    Text(data[currentType]![current!].name)
+                                    Text(data[currentType]!.first(where: { $0.id == current})!.name)
                                         .font(.title2)
                                         .fontWeight(.semibold)
                                         .fontDesign(.rounded)
@@ -114,7 +115,7 @@ struct EmblemSheetView: View {
                                 .fontDesign(.rounded)
                                 .padding([.horizontal],4.0)
                         } else {
-                            ForEach(data[currentType]![current!].textAtt, id:\.self){text in
+                            ForEach(data[currentType]!.first(where: { $0.id == current})!.textAtt, id:\.self){text in
                                 Text(text)
                                     .font(.caption)
                                     .fontWeight(.light)
@@ -145,7 +146,7 @@ struct EmblemSheetView: View {
                                         let emblem = useData[emblemIndex]
                                         if search == "" || emblem.name.lowercased().contains(search.lowercased()) {
                                             VStack(alignment:.center) {
-                                                if(emblemIndex == current){
+                                                if(emblem.id == current){
                                                     Circle()
                                                         .fill(.clear)
                                                         .frame(width: 60, height: 60)
@@ -168,7 +169,10 @@ struct EmblemSheetView: View {
                                                     .fixedSize(horizontal:true,vertical:true)
                                                     .truncationMode(.tail)
                                             }.onTapGesture{
-                                                current = emblemIndex
+                                                current = emblem.id
+                                                DispatchQueue.global().async(){
+                                                    soundFeature.playSound(urlName:"selection")
+                                                }
                                             }
                                             Spacer()
                                         } else {
@@ -202,13 +206,29 @@ struct EmblemSheetView: View {
                 .toolbar{
                     ToolbarItem(placement: .cancellationAction){
                         Button("Cancel"){
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"close")
+                            }
                             dismiss()
+                            
                         }
                     }
                     ToolbarItem(placement: .confirmationAction){
                         Button("Save"){
+                            if chosen != nil {
+                                hero.unequipEmblem(
+                                    emblem: data[currentType]!.first(where: {$0.id == chosen})!,
+                                    slot: currentType
+                                )
+                            }
                             chosen = current
-                            hero.emblems[currentType] = data[currentType]![chosen!]
+                            hero.equipEmblem(
+                                emblem: data[currentType]!.first(where: {$0.id == chosen})!,
+                                slot: currentType
+                            )
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"selection")
+                            }
                             dismiss()
                         }.disabled(chosen == current)
                         

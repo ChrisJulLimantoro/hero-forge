@@ -11,13 +11,13 @@ import SwiftUI
 struct HeroSheetView: View {
     @Environment(\.dismiss) var dismiss
     var data:[Hero] = [
-        Hero(name: "Lancelot", image:"lancelot-bg", avatar:"lancelot-avatar", role:"Assassin", hp: 2459, hpGrowth: 147, mana: 450, manaGrowth: 100, physicalAtt: 124, physicalAttGrowth: 11.7857, physicalDef: 16, physicalDefGrowth: 3.1429, magicDef: 15, magicDefGrowth: 1.6429, attSpeed: 1.08, attSpeedGrowth: 0.0185,skill:
+        Hero(id:1,name: "Lancelot", image:"lancelot-bg", avatar:"lancelot-avatar", role:"Assassin",level:0, hp: 2459, hpGrowth: 147, mana: 450, manaGrowth: 100, physicalAtt: 124, physicalAttGrowth: 11.7857, physicalDef: 16, physicalDefGrowth: 3.1429, magicDef: 15, magicDefGrowth: 1.6429, attSpeed: 1.08, attSpeedGrowth: 0.0185,skill:
                 [
                     Skill(name:"Puncture",maxLevel:6,baseDamage:[100],baseDamageGrowth: [30], additionalDamage: [AddDamage(percentPhysical:0.5)],image:"puncture-skill",cooldown:14.0,cooldownGrowth: 0.4,sound:"lancelot-skill-1"),
                     Skill(name:"Thorned Rose",maxLevel:6,baseDamage:[170,170,170],baseDamageGrowth: [15,15,15], additionalDamage: [AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3)],image:"thorned-rose-skill",cooldown:10.0,cooldownGrowth: 0.6,sound:"lancelot-skill-2"),
                     Skill(name:"Phantom Execution",maxLevel:3,baseDamage:[350],baseDamageGrowth: [75], additionalDamage: [AddDamage(percentPhysical:1.7)],image:"phantom-execution-skill",cooldown:27.0,cooldownGrowth: 3.0,sound:"lancelot-skill-3"),
                 ],basicSound: "lancelot-basic"),
-        Hero(name: "Tigreal", image:"tigreal-bg", avatar:"tigreal-avatar", role:"Tank", hp: 2690, hpGrowth: 292, mana: 450, manaGrowth: 100, physicalAtt: 112, physicalAttGrowth: 6.7857, physicalDef: 20, physicalDefGrowth: 5.3571, magicDef: 15, magicDefGrowth: 2.5, attSpeed: 1.03, attSpeedGrowth: 0.02,skill:
+        Hero(id:2,name: "Tigreal", image:"tigreal-bg", avatar:"tigreal-avatar", role:"Tank",level:1, hp: 2690, hpGrowth: 292, mana: 450, manaGrowth: 100, physicalAtt: 112, physicalAttGrowth: 6.7857, physicalDef: 20, physicalDefGrowth: 5.3571, magicDef: 15, magicDefGrowth: 2.5, attSpeed: 1.03, attSpeedGrowth: 0.02,skill:
                 [
                     Skill(name:"Puncture",maxLevel:6,baseDamage:[100],baseDamageGrowth: [30], additionalDamage: [AddDamage(percentPhysical:0.5)],image:"puncture-skill",cooldown:14.0,cooldownGrowth: 0.4,sound:"lancelot-skill-1"),
                     Skill(name:"Thorned Rose",maxLevel:6,baseDamage:[170,170,170],baseDamageGrowth: [15,15,15], additionalDamage: [AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3),AddDamage(percentPhysical:1.3)],image:"thorned-rose-skill",cooldown:14.0,cooldownGrowth: 0.4,sound:"lancelot-skill-2"),
@@ -28,6 +28,7 @@ struct HeroSheetView: View {
     @Binding var current:Int?
     @State var chosen:Int?
     @State var name:String = ""
+    @State var soundFeature = SoundFeature()
     var useData:[Hero] {
         if name != "" {
             return data.filter{
@@ -47,11 +48,11 @@ struct HeroSheetView: View {
                                 Spacer()
                                 ForEach(0..<4) { columnIndex in
                                     let heroIndex = rowIndex * 4 + columnIndex
-                                    if heroIndex < data.count {
-                                        let hero = data[heroIndex]
+                                    if heroIndex < useData.count {
+                                        let hero = useData[heroIndex]
                                         if name == "" || hero.name.lowercased().contains(name.lowercased()) {
                                             VStack {
-                                                if(heroIndex == current){
+                                                if(useData[heroIndex].id == current){
                                                     Circle()
                                                         .fill(.clear)
                                                         .frame(width: 60, height: 60)
@@ -74,11 +75,12 @@ struct HeroSheetView: View {
                                                     .fixedSize(horizontal:true,vertical:true)
                                                     .truncationMode(.tail)
                                             }.onTapGesture{
-                                                current = heroIndex
+                                                current = useData[heroIndex].id
+                                                DispatchQueue.global().async(){
+                                                    soundFeature.playSound(urlName:"selection")
+                                                }
                                             }
                                             Spacer()
-                                        } else {
-                                            
                                         }
                                     } else {
                                         Circle()
@@ -110,12 +112,18 @@ struct HeroSheetView: View {
                     Button("Cancel"){
                         dismiss()
                         current = chosen
+                        DispatchQueue.global().async(){
+                            soundFeature.playSound(urlName:"close")
+                        }
                     }
                 }
                 ToolbarItem(placement: .confirmationAction){
                     Button("Save"){
-                        hero.setHero(hero:data[current!])
+                        hero.setHero(hero:data.first(where: {$0.id == current})!)
                         dismiss()
+                        DispatchQueue.global().async(){
+                            soundFeature.playSound(urlName:"selection")
+                        }
                     }.disabled(current == chosen)
                 }
             }.padding([.horizontal],16.0)

@@ -21,17 +21,8 @@ struct TemporarySheetView:View {
     @State var typePresented = 0
     @State var emblemType = ""
     @State var itemIndex:Int = 0
-    
-    init(selectedHeroes:Binding<[Hero]>, indexHero:Binding<Int>, chosenEmblem:Binding<[String:Int?]>, currentEmblem:Binding<[String:Int?]>, chosenItem:Binding<[Int?]>, currentItem:Binding<[Int?]>){
-        self._selectedHeroes = selectedHeroes
-        self._indexHero = indexHero
-        self._chosenEmblem = chosenEmblem
-        self._currentEmblem = currentEmblem
-        self._chosenItem = chosenItem
-        self._currentItem = currentItem
-        self._tempHero = State(initialValue: selectedHeroes.wrappedValue[indexHero.wrappedValue])
-    }
-    
+    @State var soundFeature = SoundFeature()
+        
     var body: some View {
         NavigationStack{
             VStack(){
@@ -50,8 +41,7 @@ struct TemporarySheetView:View {
                     }
                     Spacer()
                 }.onTapGesture {
-                    typePresented = 0
-                    isPresented = true
+                    
                 }
                 .padding(16.0)
                 HStack{
@@ -67,6 +57,9 @@ struct TemporarySheetView:View {
                         typePresented = 1
                         emblemType = "main"
                         isPresented = true
+                        DispatchQueue.global().async(){
+                            soundFeature.playSound(urlName:"selection")
+                        }
                     }
                     Spacer()
                     HStack{
@@ -83,6 +76,9 @@ struct TemporarySheetView:View {
                             typePresented = 1
                             emblemType = "sub1"
                             isPresented = true
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"selection")
+                            }
                         }
                         VStack{
                             if tempHero.emblems["sub2"]!.image == "empty" {
@@ -97,6 +93,9 @@ struct TemporarySheetView:View {
                             typePresented = 1
                             emblemType = "sub2"
                             isPresented = true
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"selection")
+                            }
                         }
                         VStack{
                             if tempHero.emblems["sub3"]!.image == "empty" {
@@ -111,6 +110,9 @@ struct TemporarySheetView:View {
                             typePresented = 1
                             emblemType = "sub3"
                             isPresented = true
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"selection")
+                            }
                         }
                     }
                 }
@@ -162,6 +164,9 @@ struct TemporarySheetView:View {
                             tempHero = selectedHeroes[indexHero]
                             currentItem = chosenItem
                             currentEmblem = chosenEmblem
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"close")
+                            }
                             dismiss()
                         }
                     }
@@ -170,6 +175,9 @@ struct TemporarySheetView:View {
                             selectedHeroes[indexHero] = tempHero
                             chosenItem = currentItem
                             chosenEmblem = currentEmblem
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"selection")
+                            }
                             dismiss()
                         }
                     }
@@ -195,6 +203,9 @@ struct TemporarySheetView:View {
                             .presentationBackground(.thinMaterial)
                     }
                 }
+        }.onAppear {
+            tempHero = selectedHeroes[indexHero]
+            
         }
     }
 }

@@ -20,6 +20,7 @@ struct ContentView: View {
     @State var currentItem:[[Int?]] = [[nil,nil,nil,nil,nil,nil],[nil,nil,nil,nil,nil,nil]]
     @State var chosenEmblem:[[String:Int?]] = [["main":nil,"sub1":nil,"sub2":nil,"sub3":nil],["main":nil,"sub1":nil,"sub2":nil,"sub3":nil]]
     @State var currentEmblem:[[String:Int?]] = [["main":nil,"sub1":nil,"sub2":nil,"sub3":nil],["main":nil,"sub1":nil,"sub2":nil,"sub3":nil]]
+    @State var soundFeature = SoundFeature()
     
     var body: some View {
         NavigationStack{
@@ -42,6 +43,9 @@ struct ContentView: View {
                                 .onTapGesture{
                                     indexHero = 0
                                     isPresented = true
+                                    DispatchQueue.global().async(){
+                                        soundFeature.playSound(urlName:"selection")
+                                    }
                                 }
                             VStack{
                                 Spacer()
@@ -106,6 +110,9 @@ struct ContentView: View {
                                 .onTapGesture{
                                     indexHero = 1
                                     isPresented = true
+                                    DispatchQueue.global().async(){
+                                        soundFeature.playSound(urlName:"selection")
+                                    }
                                 }
                             VStack{
                                 HStack(alignment:.top){
@@ -173,6 +180,11 @@ struct ContentView: View {
                     }).disabled(chosen[0] == nil || chosen[1] == nil)
                 }
             }
+            .onAppear(){
+                DispatchQueue.global().async(){
+                    soundFeature.playBGM(urlName:"selection-sound",loop:true)
+                }
+            }
             .sheet(isPresented: $isPresented){
                 MainSheetView(
                     selectedHeroes:$selectedHeroes,
@@ -182,7 +194,8 @@ struct ContentView: View {
                     chosenEmblem:$chosenEmblem[indexHero],
                     currentEmblem:$currentEmblem[indexHero],
                     chosenItem:$chosenItem[indexHero],
-                    currentItem:$currentItem[indexHero]
+                    currentItem:$currentItem[indexHero],
+                    tempHero:selectedHeroes[indexHero]
                 )
                 .presentationDetents([.large])
                 .presentationBackgroundInteraction(.disabled)
@@ -193,6 +206,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}

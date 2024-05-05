@@ -7,6 +7,7 @@
 
 // Structure for Hero
 struct Hero{
+    var id:Int = 0
     var name:String = "Unselected"
     var role:String = "Unselected"
     var level:Int = 0
@@ -50,7 +51,7 @@ struct Hero{
         init(){
             self.name = "Unselected"
             self.role = "Unselected"
-            self.level = 1
+            self.level = 0
             self.hp = 0
             self.maxHp = 0
             self.hpGrowth = 0
@@ -73,12 +74,13 @@ struct Hero{
     }
     
 //    initialize
-    init(name: String, image:String, avatar:String, role:String, hp: Double, hpGrowth: Double, mana: Double, manaGrowth: Double, physicalAtt: Double, physicalAttGrowth: Double, physicalDef: Double, physicalDefGrowth: Double, magicDef: Double, magicDefGrowth: Double, attSpeed: Double, attSpeedGrowth: Double,skill:[Skill],basicSound:String) {
+    init(id:Int,name: String, image:String, avatar:String, role:String,level:Int, hp: Double, hpGrowth: Double, mana: Double, manaGrowth: Double, physicalAtt: Double, physicalAttGrowth: Double, physicalDef: Double, physicalDefGrowth: Double, magicDef: Double, magicDefGrowth: Double, attSpeed: Double, attSpeedGrowth: Double,skill:[Skill],basicSound:String) {
+        self.id = id
         self.name = name
         self.image = image
         self.avatar = avatar
         self.role = role
-        self.level = 1
+        self.level = level
         self.hp = hp
         self.maxHp = hp
         self.hpGrowth = hpGrowth
@@ -98,11 +100,12 @@ struct Hero{
     }
     
     mutating func setHero(hero:Hero){
+        self.id = hero.id
         self.name = hero.name
         self.image = hero.image
         self.avatar = hero.avatar
         self.role = hero.role
-        self.level = 1
+        self.level = hero.level
         self.hp = hero.hp
         self.maxHp = hero.maxHp
         self.hpGrowth = hero.hpGrowth
@@ -125,6 +128,12 @@ struct Hero{
         guard self.level < 15 else {
             return false
         }
+        
+        guard self.level > 0 else {
+            self.level = 1
+            return true
+        }
+        
         self.hp += self.hpGrowth
         self.maxHp += self.hpGrowth
         self.mana += self.manaGrowth
@@ -193,12 +202,85 @@ struct Hero{
         return true
     }
     
+//    Equip Emblem
+    mutating func equipEmblem(emblem: Emblem, slot: String){
+        self.emblems[slot] = emblem
+        self.maxHp += emblem.hp
+        self.hp += emblem.hp
+        
+        if self.magicPower > self.physicalAtt {
+            self.magicPower += emblem.atk
+        } else {
+            self.physicalAtt += emblem.atk
+        }
+        
+        self.magicDef += emblem.hyDef
+        self.physicalDef += emblem.hyDef
+        self.magicPower += emblem.magic
+        
+//        cooldown skill
+        for index in 0..<self.skills.count {
+            self.skills[index].cooldown *= (1 - emblem.cooldown)
+        }
+    }
+    
+    mutating func unequipEmblem(emblem: Emblem,slot:String){
+        self.emblems[slot] = Emblem()
+        self.maxHp -= emblem.hp
+        self.hp -= emblem.hp
+        
+        if self.magicPower > self.physicalAtt {
+            self.magicPower -= emblem.atk
+        } else {
+            self.physicalAtt -= emblem.atk
+        }
+        
+        self.magicDef -= emblem.hyDef
+        self.physicalDef -= emblem.hyDef
+        self.magicPower -= emblem.magic
+        
+        for index in 0..<self.skills.count {
+            self.skills[index].cooldown *= (1/(1 - emblem.cooldown))
+        }
+    }
+    
+    mutating func equipItem(item: Item,slot:Int){
+        self.items[slot] = item
+        self.maxHp += item.hp
+        self.hp += item.hp
+        self.physicalAtt += item.physicalAtt
+        self.magicPower += item.magPow
+        self.magicDef += item.magDef
+        self.physicalDef += item.phyDef
+    }
+    
+    mutating func unequipItem(item: Item, slot:Int){
+        self.items[slot] = Item()
+        self.maxHp -= item.hp
+        self.hp -= item.hp
+        self.physicalAtt -= item.physicalAtt
+        self.magicPower -= item.magPow
+        self.magicDef -= item.magDef
+        self.physicalDef -= item.phyDef
+    }
+    
+    
 //    Calculate Damage Basic Attack
     mutating func calculateDamage()->Double{
         guard self.level > 0 else {
             return 0
         }
-        return self.physicalAtt
+        var dmg = self.physicalAtt
+//        Calculate damage increase from Emblems
+        for emblem in self.emblems.values {
+            dmg += emblem.addDamage.calculateDamage(
+                physical: self.physicalAtt, magic: self.magicPower, enemyCurrentHealth: nil
+            )
+        }
+        
+//        Calculate from Item
+        
+        return dmg
     }
     
 //    Calculate Damage Skill based on Index Skill
@@ -208,14 +290,21 @@ struct Hero{
         }
         var dmg:Double = 0.0
         for i in 0..<self.skills[index].baseDamage.count{
+//            Multiply by skill alone
             dmg += self.skills[index].baseDamage[i] + self.skills[index].additionalDamage[i].calculateDamage(physical:self.physicalAtt, magic: self.magicPower,enemyCurrentHealth: nil)
+            
+//            Calculating from the emblems
+            for emblem in self.emblems.values {
+                dmg += emblem.addDamage.calculateDamage(
+                    physical: self.physicalAtt, magic: self.magicPower, enemyCurrentHealth: nil
+                )
+                dmg += emblem.skillDmg
+            }
+            
+//            Calculating from the items
         }
-        return dmg
-    }
-    
-//    Equip Item based on Item
-    mutating func equip(item:Item) {
         
+        return dmg
     }
     
     mutating func takeDamage(dmg:Double,pen:Double,percPen:Double)->Bool{
@@ -230,20 +319,5 @@ struct Hero{
         return true
     }
     
-    mutating func setPassive(passive:Passive){
-        self.passives.append(passive)
-    }
-    
-    mutating func unSetPassive(passive:Passive){
-        
-    }
-    
-    mutating func activatePassive(index:Int){
-        self.passives[index].activate()
-    }
-    
-    mutating func deactivatePassive(index:Int){
-        self.passives[index].deactivate()
-    }
 }
 

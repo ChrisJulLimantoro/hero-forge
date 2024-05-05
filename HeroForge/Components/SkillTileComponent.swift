@@ -12,10 +12,15 @@ import AVFoundation
 struct SkillTileComponent:View {
     @State var indexSkill:Int
     @Binding var isAlive:Bool
+    @Binding var isAttack:Bool
+    @Binding var isSlashing:Bool
     @Binding var defender:Hero
     @Binding var attacker:Hero
+    @Binding var damage:[Double]
+    @Binding var offsetX:[Double]
+    @Binding var offsetY:[Double]
     @State var isTapped = false
-    @State var audioPlayer: AVAudioPlayer?
+    @State var soundFeature = SoundFeature()
     @State var timer : Timer?
     @State var isCooldown = false
     @State var cooldownTimeElapsed: Double = 0.0 // Track time elapsed during cooldown
@@ -48,7 +53,7 @@ struct SkillTileComponent:View {
                         )
                 )
                 .onTapGesture{
-                    if !isCooldown{
+                    if !isCooldown && attacker.skills[indexSkill].level != 0 {
                         isAlive = defender.takeDamage(
                             dmg:attacker.calculateDamageSkill(index:indexSkill),
                             pen:0,
@@ -60,16 +65,52 @@ struct SkillTileComponent:View {
                         generator.impactOccurred()
                         //                    Run a dispatch time to start a countdown for Cooldown of Skil
                         cooldownDuration = attacker.skills[indexSkill].cooldown
+                        
                         startCooldownTimer()
+                        
+                        damage.append(-attacker.calculateDamageSkill(index:indexSkill))
+                        offsetX.append(CGFloat.random(in: -100...100))
+                        offsetY.append(0)
+                        
+                        withAnimation(.easeInOut(duration:2.5)) {
+                            offsetY[offsetY.count - 1] = -250
+                        }
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             withAnimation {
                                 isTapped = false
                             }
                         }
-                        playSound(urlName:attacker.skills[indexSkill].sound)
+                        isAttack = true
+                        isSlashing = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            withAnimation {
+                                isAttack = false
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation {
+                                isSlashing = false
+                            }
+                        }
+                        DispatchQueue.global().async(){
+                            soundFeature.playSound(urlName:attacker.skills[indexSkill].sound)
+                        }
                     }
                 }
+//            If the skill is locked
+            if attacker.skills[indexSkill].level == 0 {
+                Circle()
+                    .fill(.black)
+                    .opacity(0.4)
+                    .blur(radius:5)
+                    .overlay{
+                        Image(systemName:"lock.fill")
+                            .font(.system(size: 30, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                    }
+            }
+            
 //          only be here if isCooldown
             if isCooldown {
                 Circle()
@@ -116,27 +157,20 @@ struct SkillTileComponent:View {
 //        }
 //    }
     private func startCooldownTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            cooldownTimeElapsed += 0.1 // Increment cooldown time elapsed
-            if cooldownTimeElapsed >= cooldownDuration {
-                // Reset cooldown state and timer when cooldown is finished
-                isCooldown = false
-                cooldownTimeElapsed = 0.0
-                timer?.invalidate()
+        DispatchQueue.global().async {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                self.cooldownTimeElapsed += 0.1 // Increment cooldown time elapsed
+                if self.cooldownTimeElapsed >= self.cooldownDuration {
+                    // Reset cooldown state and timer when cooldown is finished
+                    self.isCooldown = false
+                    self.cooldownTimeElapsed = 0.0
+                    self.timer?.invalidate()
+                }
             }
-        }
-    }
-    
-    func playSound(urlName:String) {
-        guard let url = Bundle.main.url(forResource: urlName, withExtension: "mp3") else { return }
-        
-        do {
-            // Initialize audio player
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            // Play the sound
-            audioPlayer?.play()
-        } catch let error {
-            print("Error: \(error.localizedDescription)")
+            
+            // Add timer to run loop
+            RunLoop.current.add(self.timer!, forMode: .common)
+            RunLoop.current.run()
         }
     }
 }

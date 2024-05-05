@@ -13,6 +13,7 @@ struct ItemTile: View {
     @Binding var typePresented:Int
     @Binding var items:[Item]
     @Binding var current:Int
+    @State var soundFeature = SoundFeature()
     var itemIndex:Int
     var body: some View {
         HStack{
@@ -34,6 +35,9 @@ struct ItemTile: View {
             typePresented = 2
             current = itemIndex
             isPresented = true
+            DispatchQueue.global().async(){
+                soundFeature.playSound(urlName:"selection")
+            }
         }
     }
 }

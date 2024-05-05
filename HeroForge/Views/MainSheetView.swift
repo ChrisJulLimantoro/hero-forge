@@ -21,21 +21,10 @@ struct MainSheetView:View {
     @Binding var currentItem:[Int?]
     @State private var isPresented = false
     @State private var typePresented = 0
+    @State private var soundFeature = SoundFeature()
     @State var tempHero:Hero
     @State var emblemType = ""
     @State var itemIndex = 0
-    
-    init(selectedHeroes:Binding<[Hero]>, indexHero:Binding<Int>, chosenHero:Binding<Int?>, currentHero:Binding<Int?>, chosenEmblem:Binding<[String:Int?]>, currentEmblem:Binding<[String:Int?]>, chosenItem:Binding<[Int?]>, currentItem:Binding<[Int?]>){
-        self._selectedHeroes = selectedHeroes
-        self._indexHero = indexHero
-        self._chosenHero = chosenHero
-        self._currentHero = currentHero
-        self._chosenEmblem = chosenEmblem
-        self._currentEmblem = currentEmblem
-        self._chosenItem = chosenItem
-        self._currentItem = currentItem
-        self._tempHero = State(initialValue: selectedHeroes.wrappedValue[indexHero.wrappedValue])
-    }
     
     var body: some View {
         NavigationStack {
@@ -66,6 +55,9 @@ struct MainSheetView:View {
                         }.onTapGesture {
                             typePresented = 0
                             isPresented = true
+                            DispatchQueue.global().async(){
+                                soundFeature.playSound(urlName:"selection")
+                            }
                         }
                         .padding(16.0)
                         .background(
@@ -100,6 +92,9 @@ struct MainSheetView:View {
                                 typePresented = 1
                                 emblemType = "main"
                                 isPresented = true
+                                DispatchQueue.global().async(){
+                                    soundFeature.playSound(urlName:"selection")
+                                }
                             }
                             Spacer()
                             HStack{
@@ -116,6 +111,9 @@ struct MainSheetView:View {
                                     typePresented = 1
                                     emblemType = "sub1"
                                     isPresented = true
+                                    DispatchQueue.global().async(){
+                                        soundFeature.playSound(urlName:"selection")
+                                    }
                                 }
                                 VStack{
                                     if tempHero.emblems["sub2"]!.image == "empty" {
@@ -130,6 +128,9 @@ struct MainSheetView:View {
                                     typePresented = 1
                                     emblemType = "sub2"
                                     isPresented = true
+                                    DispatchQueue.global().async(){
+                                        soundFeature.playSound(urlName:"selection")
+                                    }
                                 }
                                 VStack{
                                     if tempHero.emblems["sub3"]!.image == "empty" {
@@ -144,6 +145,9 @@ struct MainSheetView:View {
                                     typePresented = 1
                                     emblemType = "sub3"
                                     isPresented = true
+                                    DispatchQueue.global().async(){
+                                        soundFeature.playSound(urlName:"selection")
+                                    }
                                 }
                             }
                         }
@@ -211,6 +215,9 @@ struct MainSheetView:View {
                         currentHero = chosenHero
                         currentItem = chosenItem
                         currentEmblem = chosenEmblem
+                        DispatchQueue.global().async(){
+                            soundFeature.playSound(urlName:"close")
+                        }
                         dismiss()
                     }
                 }
@@ -220,6 +227,9 @@ struct MainSheetView:View {
                         chosenHero = currentHero
                         chosenItem = currentItem
                         chosenEmblem = currentEmblem
+                        DispatchQueue.global().async(){
+                            soundFeature.playSound(urlName:"selection")
+                        }
                         dismiss()
                     }.disabled((chosenHero == currentHero && chosenItem == currentItem && chosenEmblem == currentEmblem) || currentHero == nil)
                 }
@@ -251,6 +261,9 @@ struct MainSheetView:View {
                 }
             }
             
+        }.onAppear {
+            tempHero = selectedHeroes[indexHero]
+            print(indexHero)
         }
     }
 }

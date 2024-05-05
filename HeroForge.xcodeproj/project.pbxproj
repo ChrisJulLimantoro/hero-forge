@@ -36,8 +36,13 @@
 		A46B3FC72BE232B500F41DD7 /* selection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FC12BE232B500F41DD7 /* selection.mp3 */; };
 		A46B3FCA2BE232D200F41DD7 /* lancelot-basic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FC92BE232D200F41DD7 /* lancelot-basic.mp3 */; };
 		A46B3FCC2BE233C200F41DD7 /* lancelot-skill-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A46B3FCB2BE233C200F41DD7 /* lancelot-skill-1.mp3 */; };
+		A498DB272BE38E5F00BE28FD /* SoundFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A498DB262BE38E5F00BE28FD /* SoundFeature.swift */; };
 		A4A665582BDAAEF40043C23D /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665572BDAAEF40043C23D /* ItemModel.swift */; };
 		A4A6655A2BDAB5F40043C23D /* PassiveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A665592BDAB5F40043C23D /* PassiveModel.swift */; };
+		A4F84F4E2BE7C74400DF1264 /* skill-up.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F84F4A2BE7C74400DF1264 /* skill-up.mp3 */; };
+		A4F84F4F2BE7C74400DF1264 /* hero-up.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F84F4B2BE7C74400DF1264 /* hero-up.mp3 */; };
+		A4F84F502BE7C74400DF1264 /* combat-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F84F4C2BE7C74400DF1264 /* combat-sound.mp3 */; };
+		A4F84F512BE7C74400DF1264 /* selection-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A4F84F4D2BE7C74400DF1264 /* selection-sound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,8 +95,13 @@
 		A46B3FC12BE232B500F41DD7 /* selection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = selection.mp3; sourceTree = "<group>"; };
 		A46B3FC92BE232D200F41DD7 /* lancelot-basic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "lancelot-basic.mp3"; sourceTree = "<group>"; };
 		A46B3FCB2BE233C200F41DD7 /* lancelot-skill-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "lancelot-skill-1.mp3"; sourceTree = "<group>"; };
+		A498DB262BE38E5F00BE28FD /* SoundFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFeature.swift; sourceTree = "<group>"; };
 		A4A665572BDAAEF40043C23D /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		A4A665592BDAB5F40043C23D /* PassiveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassiveModel.swift; sourceTree = "<group>"; };
+		A4F84F4A2BE7C74400DF1264 /* skill-up.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "skill-up.mp3"; sourceTree = "<group>"; };
+		A4F84F4B2BE7C74400DF1264 /* hero-up.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "hero-up.mp3"; sourceTree = "<group>"; };
+		A4F84F4C2BE7C74400DF1264 /* combat-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "combat-sound.mp3"; sourceTree = "<group>"; };
+		A4F84F4D2BE7C74400DF1264 /* selection-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "selection-sound.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +164,7 @@
 		A41D4D8B2BD799DD00668943 /* HeroForge */ = {
 			isa = PBXGroup;
 			children = (
+				A498DB252BE38E3400BE28FD /* Feature */,
 				A46B3FB92BE20E4600F41DD7 /* sound */,
 				A4100D022BDBAF9F002F954A /* Components */,
 				A443D9232BDA4F9F00DB37F0 /* Models */,
@@ -226,9 +237,21 @@
 				A46B3FBD2BE232B500F41DD7 /* close.mp3 */,
 				A46B3FBF2BE232B500F41DD7 /* lancelot-skill-2.mp3 */,
 				A46B3FBE2BE232B500F41DD7 /* lancelot-skill-3.mp3 */,
+				A4F84F4C2BE7C74400DF1264 /* combat-sound.mp3 */,
+				A4F84F4B2BE7C74400DF1264 /* hero-up.mp3 */,
+				A4F84F4D2BE7C74400DF1264 /* selection-sound.mp3 */,
+				A4F84F4A2BE7C74400DF1264 /* skill-up.mp3 */,
 				A46B3FC12BE232B500F41DD7 /* selection.mp3 */,
 			);
 			path = sound;
+			sourceTree = "<group>";
+		};
+		A498DB252BE38E3400BE28FD /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				A498DB262BE38E5F00BE28FD /* SoundFeature.swift */,
+			);
+			path = Feature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +358,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F84F4E2BE7C74400DF1264 /* skill-up.mp3 in Resources */,
+				A4F84F512BE7C74400DF1264 /* selection-sound.mp3 in Resources */,
+				A4F84F4F2BE7C74400DF1264 /* hero-up.mp3 in Resources */,
+				A4F84F502BE7C74400DF1264 /* combat-sound.mp3 in Resources */,
 				A46B3FCA2BE232D200F41DD7 /* lancelot-basic.mp3 in Resources */,
 				A46B3FC72BE232B500F41DD7 /* selection.mp3 in Resources */,
 				A46B3FC52BE232B500F41DD7 /* lancelot-skill-2.mp3 in Resources */,
@@ -369,6 +396,7 @@
 			files = (
 				A4100D062BDBB7D1002F954A /* HeroSheetView.swift in Sources */,
 				A46B3FAF2BE1E88700F41DD7 /* SkillTileComponent.swift in Sources */,
+				A498DB272BE38E5F00BE28FD /* SoundFeature.swift in Sources */,
 				A46B3FBC2BE2156A00F41DD7 /* TemporarySheetView.swift in Sources */,
 				A4100D012BDB9931002F954A /* MainSheetView.swift in Sources */,
 				A4100D082BDBBE17002F954A /* EmblemSheetView.swift in Sources */,

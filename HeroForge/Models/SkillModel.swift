@@ -46,6 +46,12 @@ struct Skill {
         guard self.level < self.maxLevel else{
             return false
         }
+        
+        guard self.level > 0 else {
+            self.level += 1
+            return true
+        }
+        
         self.level += 1
         self.cooldown -= self.cooldownGrowth
         
